@@ -23,9 +23,7 @@ export default function Nav() {
 
                 {/* Curriculum */}
                 <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
-                        <path d="..." />
-                    </svg>
+                <img src="/raise-hand.png" alt="Home" className="mb-1 w-6 h-6" />
                     <a href="/curriculum">Curriculum</a>
                 </li>
 
