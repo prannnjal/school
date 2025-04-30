@@ -1,48 +1,52 @@
-'use client'
+'use client';
+import { useEffect, useState } from 'react';
+import { gsap, CSSPlugin, Expo } from 'gsap';
+import Nav from '../../components/nav'; // Correct import for Nav
+import First from '../../components/first'; // Import First component for image slider
 
-import { useState, useEffect } from "react";
-import { gsap, CSSPlugin, Expo } from "gsap";
-import Nav from "../../components/nav"; // Import Nav here
 gsap.registerPlugin(CSSPlugin);
 
 export default function Home() {
   const [counter, setCounter] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false); // NEW: for showing Nav
+  const [isLoaded, setIsLoaded] = useState(false); // For showing Nav after animation completes
 
   useEffect(() => {
+    // Interval to increase the loading bar width
     const count = setInterval(() => {
-      setCounter((counter) =>
-        counter < 100
-          ? counter + 1
+      setCounter((prevCounter) =>
+        prevCounter < 100
+          ? prevCounter + 1
           : (clearInterval(count), setCounter(100), reveal())
       );
     }, 25);
+    return () => clearInterval(count); // Clean up the interval on unmount
   }, []);
 
   const reveal = () => {
+    // Create a GSAP animation timeline for loading
     const t1 = gsap.timeline({
       onComplete: () => {
-        console.log("completed");
-        setIsLoaded(true); // ✅ Show Nav after animation completes
+        console.log('Loading completed');
+        setIsLoaded(true); // Show Nav and First component after animation completes
       },
     });
-    t1.to(".follow", {
-      width: "100%",
+    t1.to('.follow', {
+      width: '100%',
       ease: Expo.easeInOut,
       duration: 1.2,
       delay: 0.7,
     })
-      .to(".hide", { opacity: 0, duration: 0.3 })
-      .to(".hide", { display: "none", duration: 0.3 })
-      .to(".follow", {
-        height: "100%",
+      .to('.hide', { opacity: 0, duration: 0.3 })
+      .to('.hide', { display: 'none', duration: 0.3 })
+      .to('.follow', {
+        height: '100%',
         ease: Expo.easeInOut,
         duration: 0.7,
         delay: 0.5,
       })
-      .to(".content", { width: "100%", ease: Expo.easeInOut, duration: 0.7 })
-      .to(".title-lines", { display: "block", duration: 0.1 })
-      .to(".title-lines", {
+      .to('.content', { width: '100%', ease: Expo.easeInOut, duration: 0.7 })
+      .to('.title-lines', { display: 'block', duration: 0.1 })
+      .to('.title-lines', {
         opacity: 1,
         stagger: 0.15,
         ease: Expo.easeInOut,
@@ -65,25 +69,18 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="content absolute top-0 left-0 h-full w-0 bg-[#121212] flex flex-col justify-center items-center overflow-hidden text-white z-40">
-        <p className="title-lines hidden opacity-0 text-center text-[104px] font-semibold m-0">
-          The greatest glory in living lies
-        </p>
-        <p className="title-lines hidden opacity-0 text-center text-[104px] font-semibold m-0">
-          not in never falling,
-        </p>
-        <p className="title-lines hidden opacity-0 text-center text-[104px] font-semibold m-0">
-          but in rising every time we fall.
-        </p>
-        <p className="title-lines hidden opacity-0 text-center text-[104px] font-semibold m-0">
-          -Nelson Mandela
-        </p>
-      </div>
-
-      {/* ✅ Nav appears only after loading */}
       {isLoaded && (
-        <div className="absolute top-0 left-0 w-full z-50">
-          <Nav />
+        <div className="flex w-full h-full">
+          {/* Nav component */}
+          <div className="absolute top-0 left-0 w-full z-50">
+            <Nav />
+          </div>
+
+          {/* First component with image slider next to the Nav */}
+          <div className="absolute top-[133px] left-0 w-full h-[900px] z-400">
+            <First />
+          </div>
+         
         </div>
       )}
     </div>

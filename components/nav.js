@@ -1,75 +1,85 @@
-import { motion } from "framer-motion";
+'use client';
+import { motion } from 'framer-motion';
+import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa'; // Importing the icons
+import Image from 'next/image';
 
 export default function Nav() {
     return (
-        <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full flex items-center justify-between px-8 py-4 bg-white shadow-md"
-        >
-            {/* Logo */}
-            <div className="flex-shrink-0">
-                <img src="/logo.webp" alt="Logo" className="h-10 w-auto" />
+        <div className="w-full relative">
+            {/* Top Bar */}
+            <div className="bg-[#E3F0A3] text-green-500 hover:text-green-600 flex justify-between items-center px-6 py-1 text-sm">
+                {/* Left: Empty for overlap */}
+                <div className="flex items-center gap-6"></div>
+
+                {/* Center: Phone & Mail Info */}
+                <div className="flex items-center gap-6 justify-center w-full">
+                    <div className="flex items-center gap-2">
+                        <FaPhoneAlt size={16} /> {/* React Icon for Phone */}
+                        <span>+91 7388807999</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <FaEnvelope size={16} /> {/* React Icon for Email */}
+                        <span>info@birlaopenmindslko.com</span>
+                    </div>
+                </div>
+
+                {/* Right: Social Button */}
+                <div>
+    <button className="bg-green-500 text-white hover:text-green-900 px-4 py-1 rounded-sm font-semibold whitespace-nowrap">
+        Get Us Social
+    </button>
+</div>
+
             </div>
 
-            {/* Navigation Menu */}
-            <ul className="flex items-center gap-10">
-                {/* Home */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/home-1-svgrepo-com.svg" alt="Home" className="mb-1 w-6 h-6" />
-                    <a href="/">Home</a>
-                </li>
-
-                {/* Curriculum */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                <img src="/raise-hand.png" alt="Home" className="mb-1 w-6 h-6" />
-                    <a href="/curriculum">Curriculum</a>
-                </li>
-
-                {/* Infrastructure */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/book-open-svgrepo-com.svg" alt="Infrastructure" className="mb-1 w-6 h-6" />
-                    <a href="/infrastructure">Infrastructure</a>
-                </li>
-
-                {/* Sports */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/sports-shoes-1-svgrepo-com.svg" alt="Sports" className="mb-1 w-6 h-6" />
-                    <a href="/sports">Sports</a>
-                </li>
-
-                {/* Classroom */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/file.svg" alt="Classroom" className="mb-1 w-6 h-6" />
-                    <a href="/classroom">Classroom</a>
-                </li>
-
-                {/* The Birla Story */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/chat-square-code-svgrepo-com.svg" alt="The Birla Story" className="mb-1 w-6 h-6" />
-                    <a href="/story">The Birla Story</a>
-                </li>
-
-                {/* Contact Us */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/contact-svgrepo-com.svg" alt="Contact Us" className="mb-1 w-6 h-6" />
-                    <a href="/contact">Contact Us</a>
-                </li>
-
-                {/* Career */}
-                <li className="flex flex-col items-center text-green-500 hover:text-green-600">
-                    <img src="/person-line-drawing-svgrepo-com.svg" alt="Career" className="mb-1 w-6 h-6" />
-                    <a href="/career">Career</a>
-                </li>
-            </ul>
-
-            {/* Enquiry Button */}
-            <a href="/enquiry">
-                <button className="bg-green-500 text-white px-6 py-2 rounded-md font-bold hover:text-green-900 cursor-pointer">
-                    ENQUIRY
+            {/* Floating ADMISSION OPEN Button */}
+            <div className="absolute left-6 top-[12px] z-20">
+                <button className="bg-green-500 text-white hover:text-green-900 px-5 py-2 rounded-md font-semibold shadow-md">
+                    ADMISSION OPEN
                 </button>
-            </a>
-        </motion.nav>
+            </div>
+
+            {/* Main Navigation */}
+            <motion.nav
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className="w-full flex items-center justify-between px-8 py-6 bg-white shadow-md"
+            >
+                {/* Logo */}
+                <div className="flex-shrink-0">
+                    <Image src="/logo.webp" alt="Logo" width={130} height={50} />
+                </div>
+
+                {/* Nav Menu */}
+                <ul className="flex items-center gap-6 xl:gap-10">
+                    {[
+                        { label: 'Home', href: '/', icon: '/home-1-svgrepo-com.svg' },
+                        { label: 'Curriculum', href: '/curriculum', icon: '/raise-hand.png' },
+                        { label: 'Infrastructure', href: '/infrastructure', icon: '/book-open-svgrepo-com.svg' },
+                        { label: 'Sports', href: '/sports', icon: '/sports-shoes-1-svgrepo-com.svg' },
+                        { label: 'Classroom', href: '/classroom', icon: '/file.svg' },
+                        { label: 'The Birla story', href: '/story', icon: '/chat-square-code-svgrepo-com.svg' },
+                        { label: 'Contact Us', href: '/contact', icon: '/contact-svgrepo-com.svg' },
+                        { label: 'Career', href: '/career', icon: '/person-line-drawing-svgrepo-com.svg' },
+                    ].map(({ label, href, icon }) => (
+                        <li
+                            key={label}
+                            className="flex flex-col items-center text-green-500 hover:text-green-600 text-sm"
+                        >
+                            <Image src={icon} alt={label} width={24} height={24} className="mb-1" />
+                            <a href={href}>{label}</a>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* Enquiry Button */}
+                <a href="/enquiry">
+                    <button className="bg-green-500 text-white hover:text-green-900 px-6 py-2 rounded-md font-bold transition">
+                        ENQUIRY
+                    </button>
+                </a>
+            </motion.nav>
+        </div>
     );
 }
