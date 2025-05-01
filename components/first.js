@@ -63,7 +63,7 @@ export default function HeroSlider() {
   }, [current]);
 
   return (
-    <div className="w-full h-96 md:h-[550px] relative overflow-hidden flex items-center justify-center">
+    <div className="w-full h-[350px] md:h-[550px] relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 w-full h-full" style={{ perspective: '1000px' }}>
         {images.map((src, index) => (
           <div
@@ -71,9 +71,7 @@ export default function HeroSlider() {
             ref={(el) => {
               if (el) imageRefs.current[index] = el;
             }}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
           >
             <Image
               src={src}
@@ -87,9 +85,9 @@ export default function HeroSlider() {
               ref={(el) => {
                 if (el) textRefs.current[index] = el;
               }}
-              className="absolute inset-0 flex items-center justify-center px-4"
+              className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 md:px-10 lg:px-14"
             >
-              <h1 className="text-white text-2xl md:text-4xl font-bold text-center max-w-2xl">
+              <h1 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center max-w-3xl lg:max-w-4xl">
                 {textLines[index]}
               </h1>
             </div>

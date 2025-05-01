@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css'; // Global styles
 import { motion } from 'framer-motion'; // To use motion effects in the layout if needed
-
+import About from '../../components/about';
+import Carousel from '../../components/Carousel';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -23,6 +24,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children} {/* This renders your page.js */}
+        <About />
+        < Carousel />
+
       </body>
     </html>
   );
